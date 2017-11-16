@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Image, Linking, Text, Button } from 'react-native';
+import { View, Image, Linking, Text } from 'react-native';
+import Styles from './Album.style'
 import Card from '../Card'
 import CardSection from '../CardSection'
-import Styles from './Album.style'
+import Button from '../Button'
 
 const AlbumDetail = (props) => {
 
@@ -23,7 +24,7 @@ const AlbumDetail = (props) => {
         <Image style={albumImageStyle} source={{uri: props.album.image}} />
       </CardSection>
       <CardSection>
-        <Button title="Learn More" />
+        <Button onPress={ () => Linking.openURL(props.album.url) } text="Buy Now"/>
       </CardSection>
     </Card>
   );
