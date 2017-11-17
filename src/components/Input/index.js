@@ -7,7 +7,7 @@ const Input = (props) => {
   return (
     <View style={containerStyle}>
       <Text style={labelStyle}>{props.label}</Text>
-      <TextInput secureTextEntry={props.password} placeholder={props.placeholder} autoCorrect={false} style={textInputStyle} value={props.value} onChangeText={ () => props.onChangeText() }/>
+      <TextInput secureTextEntry={props.password} placeholder={props.placeholder} autoCorrect={false} style={textInputStyle} value={props.value} onChangeText={ (text) => props.onChangeText(text) }/>
     </View>
   );
 }
