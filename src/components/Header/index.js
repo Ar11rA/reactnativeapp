@@ -10,4 +10,9 @@ const Header = (props) => {
   );
 }
 
+const defaultProps = {
+  title: 'Albums'
+}
+Header.defaultProps = defaultProps
+
 export default Header

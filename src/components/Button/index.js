@@ -10,4 +10,10 @@ const Button = (props) => {
   );
 }
 
+const defaultProps = {
+  text: 'Buy Now', 
+  onPress: () => { console.log('pressed') }
+}
+Button.defaultProps = defaultProps
+
 export default Button
