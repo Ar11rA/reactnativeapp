@@ -5,25 +5,50 @@ import CardSection from '../CardSection';
 import Card from '../Card';
 import Button from '../Button';
 import Input from '../Input';
+import Spinner from '../Spinner'
 import loginFormStyles from './LoginForm.style'
+
 
 class LoginForm extends Component {
   state = {
     email: '',
     password: '',
-    error: ''
+    error: '',
+    loading: false
   };
   
   handleLogin() {
     const {email, password} = this.state;
+    this.setState({ error: '', loading: true })
     firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(() => this.onLoginSuccess())
       .catch(() => {
         firebase.auth().createUserWithEmailAndPassword(email, password)
-          .catch(() => {
-            this.setState({ error: 'Authentication failed!!' })
-          })
+          .then(() => this.onLoginSuccess())
+          .catch(() => this.onLoginFail())
       })
   }
+
+  onLoginSuccess() {
+    this.setState({
+      email: '',
+      password: '',
+      loading: false,
+      error: ''
+    })
+  }
+
+  onLoginFail() {
+    this.setState({ 
+      error: 'Authentication failed!!',
+      loading: false
+     })
+  }
+  
+  renderButton() {
+  return this.state.loading ? <Spinner size='small'/> : <Button onPress={this.handleLogin.bind(this)} text='Log in'/>;
+  }
+
 
   render() {
     const { errorStyle } = loginFormStyles;
@@ -39,7 +64,7 @@ class LoginForm extends Component {
           {this.state.error}
         </Text>
         <CardSection>
-          <Button onPress={this.handleLogin.bind(this)} text="Log in"/>
+          {this.renderButton()}
         </CardSection>
       </Card>
     );

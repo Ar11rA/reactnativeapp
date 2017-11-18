@@ -8,13 +8,21 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView
 } from 'react-native';
-import Header from './components/Header'
-import LoginForm from './components/LoginForm'
-import firebase from 'firebase'
+import Header from './components/Header';
+import LoginForm from './components/LoginForm';
+import AlbumList from './components/AlbumList';
+import Button from './components/Button';
+import Spinner from './components/Spinner';
+import firebase from 'firebase';
 
 export default class App extends Component {
+  
+  state = {
+    loggedIn: null
+  }
 
   componentWillMount(){
     firebase.initializeApp({
@@ -24,16 +32,38 @@ export default class App extends Component {
       projectId: "auth-7b923",
       storageBucket: "auth-7b923.appspot.com",
       messagingSenderId: "43220690525"
-    })
+    });
+
+    firebase.auth().onAuthStateChanged((user) => {
+      user ? this.setState({ loggedIn: true }) : this.setState({ loggedIn: false });
+    });
+  }
+
+  onLogOut() {
+    firebase.auth().signOut()
   }
 
   render() {
-    return (
-      <View style={{ 'flex': 1 }}>
-        <Header title='Auth'/>
-        <LoginForm />
-      </View>
-    );
+    switch (this.state.loggedIn) {
+      case true:
+        return (
+        <ScrollView>
+          <Header title='Albums'/>  
+          <AlbumList onLogOut={() => this.onLogOut()}/>
+        </ScrollView>
+        );
+      break;
+      case false:
+        return (
+        <View>
+          <Header title='Auth'/>
+          <LoginForm />
+        </View>
+        );
+      break;
+      default:
+        return <Spinner /> 
+    }
   }
 }
 
