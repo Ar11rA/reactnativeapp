@@ -11,16 +11,13 @@ class AlbumList extends Component {
   state = {
     albums:  []
   };
-
   componentWillMount() {
     axios.get('https://rallycoding.herokuapp.com/api/music_albums')
       .then((response) =>this.setState({albums: response.data}));
   }
-
   displayTitles(items) {
     return items.map((item) => <AlbumDetail key={item.title} album={item} />)
   }
-
   render() {
     if(this.state.albums.length === 0)
       return (
