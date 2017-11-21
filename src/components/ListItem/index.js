@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Text, TouchableWithoutFeedback, View, LayoutAnimation } from 'react-native';
 import CardSection from '../CardSection';
 import ListItemStyle from './ListItem.style';
 import * as actions from '../../actions';
@@ -7,10 +7,17 @@ import { connect } from 'react-redux';
 
 class ListItem extends Component {
   
+  componentWillUpdate() {
+    LayoutAnimation.linear()
+  }
+
   renderDescription() {
-    if(this.props.library.id === this.props.selectedLibraryId) {
+    const { descriptionStyle } = ListItemStyle
+    if(this.props.expanded) {
       return (
-        <Text>{this.props.library.description}</Text>
+        <CardSection>
+          <Text style={descriptionStyle}>{this.props.library.description}</Text>
+        </CardSection>
       )
     }
   }
@@ -30,12 +37,11 @@ class ListItem extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {selectedLibraryId: state.selectedLibraryId}
+const mapStateToProps = (state, ownProps) => {
+  const expanded = state.selectedLibraryId === ownProps.library.id;
+  return {expanded: expanded}
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   dispatch
-// });
+const mapDispatchToProps = actions;
 
-export default connect(mapStateToProps, actions)(ListItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ListItem);
