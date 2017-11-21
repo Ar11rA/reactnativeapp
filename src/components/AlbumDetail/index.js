@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Image, Linking, Text } from 'react-native';
-import Styles from './Album.style'
-import Card from '../Card'
-import CardSection from '../CardSection'
-import Button from '../Button'
+import Styles from './Album.style';
+import Card from '../Card';
+import CardSection from '../CardSection';
+import Button from '../Button';
 
 const AlbumDetail = (props) => {
 
-  const { headerStyle, headerTextStyle, thumbnailStyle, thumbnailContainerStyle, albumImageStyle } = Styles
+  const { headerStyle, headerTextStyle, thumbnailStyle, thumbnailContainerStyle, albumImageStyle } = Styles;
 
   return (
     <Card>
@@ -28,17 +28,17 @@ const AlbumDetail = (props) => {
       </CardSection>
     </Card>
   );
-}
+};
 
 const defaultProps = {
   album: {
-    title: "Taylor Swift",
-    artist: "Taylor Swift",
-    url: "https://www.amazon.com/Taylor-Swift/dp/B0014I4KH6",
-    image: "https://images-na.ssl-images-amazon.com/images/I/61McsadO1OL.jpg",
-    thumbnail_image: "https://i.imgur.com/K3KJ3w4h.jpg"
+    title: 'Taylor Swift',
+    artist: 'Taylor Swift',
+    url: 'https://www.amazon.com/Taylor-Swift/dp/B0014I4KH6',
+    image: 'https://images-na.ssl-images-amazon.com/images/I/61McsadO1OL.jpg',
+    thumbnail_image: 'https://i.imgur.com/K3KJ3w4h.jpg'
   }
-}
-AlbumDetail.defaultProps = defaultProps
+};
+AlbumDetail.defaultProps = defaultProps;
 
-export default AlbumDetail
+export default AlbumDetail;

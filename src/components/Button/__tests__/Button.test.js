@@ -10,16 +10,16 @@ Enzyme.configure({ adapter: new EnzymeAdapter() });
 it('renders correctly', () => {
   const tree = renderer.create(
     <Button />
-    ).toJSON();
+  ).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 it('it should render 1 text component', () => {
   const wrapper = shallow(<Button/>);
-  expect(wrapper.find(Text)).toHaveLength(1)
+  expect(wrapper.find(Text)).toHaveLength(1);
 });
   
 it('it should render 1 touchable opacity component', () => {
   const wrapper = shallow(<Button/>);
-  expect(wrapper.find(TouchableOpacity)).toHaveLength(1)
+  expect(wrapper.find(TouchableOpacity)).toHaveLength(1);
 });

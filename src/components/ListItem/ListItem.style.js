@@ -8,6 +8,6 @@ const styles = {
     paddingLeft: 15,
     paddingRight: 15
   }
-}
+};
 
 export default styles;

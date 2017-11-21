@@ -17,6 +17,6 @@ const styles = {
     paddingBottom: 10,
     color: '#007aff'
   }
-}
+};
 
-export default styles
+export default styles;

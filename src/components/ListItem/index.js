@@ -8,23 +8,23 @@ import { connect } from 'react-redux';
 class ListItem extends Component {
   
   componentWillUpdate() {
-    LayoutAnimation.linear()
+    LayoutAnimation.linear();
   }
 
   renderDescription() {
-    const { descriptionStyle } = ListItemStyle
+    const { descriptionStyle } = ListItemStyle;
     if(this.props.expanded) {
       return (
         <CardSection>
           <Text style={descriptionStyle}>{this.props.library.description}</Text>
         </CardSection>
-      )
+      );
     }
   }
 
   render() {
-    const { titleStyle } = ListItemStyle
-    const { id, title } = this.props.library
+    const { titleStyle } = ListItemStyle;
+    const { id, title } = this.props.library;
     return (
       <TouchableWithoutFeedback onPress={() => this.props.selectLibrary(id)}>
         <View>
@@ -39,8 +39,8 @@ class ListItem extends Component {
 }
 const mapStateToProps = (state, ownProps) => {
   const expanded = state.selectedLibraryId === ownProps.library.id;
-  return {expanded: expanded}
-}
+  return {expanded: expanded};
+};
 
 const mapDispatchToProps = actions;
 
